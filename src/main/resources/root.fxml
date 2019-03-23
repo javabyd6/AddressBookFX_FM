@@ -5,7 +5,7 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<VBox fillWidth="false" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="290.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pl.sda.addressbook.Controller.RootViewController">
    <children>
       <AnchorPane prefHeight="418.0" prefWidth="600.0">
          <children>
@@ -13,10 +13,10 @@
               <items>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <TableView layoutX="-6.0" layoutY="88.0" prefHeight="288.0" prefWidth="244.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <TableView fx:id="personTableView" layoutX="-6.0" layoutY="88.0" onMouseClicked="#showSelectedPerson" prefHeight="288.0" prefWidth="244.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                           <columns>
-                            <TableColumn prefWidth="120.0" text="Name" />
-                            <TableColumn prefWidth="124.0" text="Last name" />
+                            <TableColumn fx:id="nameCol" prefWidth="120.0" text="Name" />
+                            <TableColumn fx:id="lastNameCol" prefWidth="124.0" text="Last name" />
                           </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -26,11 +26,11 @@
                   </AnchorPane>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                      <children>
-                        <GridPane alignment="CENTER" gridLinesVisible="true" layoutX="54.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="600.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="348.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
+                        <GridPane layoutX="54.0" layoutY="24.0" maxHeight="-Infinity" maxWidth="600.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="348.0" AnchorPane.bottomAnchor="64.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="24.0">
                           <columnConstraints>
                               <ColumnConstraints hgrow="SOMETIMES" maxWidth="25.0" minWidth="25.0" prefWidth="25.0" />
                             <ColumnConstraints hgrow="SOMETIMES" maxWidth="90.0" minWidth="90.0" prefWidth="90.0" />
-                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="237.0" minWidth="10.0" prefWidth="231.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="600.0" minWidth="10.0" prefWidth="231.0" />
                           </columnConstraints>
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -71,12 +71,12 @@
                                     <Insets left="50.0" right="50.0" />
                                  </opaqueInsets>
                               </Label>
-                              <Label GridPane.columnIndex="2" />
-                              <Label GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                              <Label GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                              <Label GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                              <Label GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                              <Label GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                              <Label fx:id="name" GridPane.columnIndex="2" />
+                              <Label fx:id="lastName" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <Label fx:id="address" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                              <Label fx:id="postalCode" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                              <Label fx:id="telephone" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                              <Label fx:id="city" GridPane.columnIndex="2" GridPane.rowIndex="5" />
                            </children>
                            <opaqueInsets>
                               <Insets />
@@ -84,10 +84,10 @@
                         </GridPane>
                         <ToolBar layoutY="248.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="356.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="248.0">
                           <items>
-                            <Button maxWidth="120.0" minWidth="40.0" mnemonicParsing="false" prefWidth="80.0" text="Add person" />
-                              <Button maxWidth="120.0" minWidth="40.0" mnemonicParsing="false" prefWidth="80.0" text="Edit" />
-                              <Button maxWidth="120.0" minWidth="40.0" mnemonicParsing="false" prefWidth="80.0" text="Delete" />
-                              <Button maxWidth="120.0" minWidth="40.0" mnemonicParsing="false" prefWidth="80.0" text="Save" />
+                            <Button fx:id="addPerson" maxWidth="300.0" minWidth="40.0" mnemonicParsing="false" onAction="#addNewPerson" prefWidth="80.0" text="Add person" />
+                              <Button fx:id="edit" maxWidth="120.0" minWidth="40.0" mnemonicParsing="false" onAction="#editRecord" prefWidth="80.0" text="Edit" />
+                              <Button fx:id="delete" maxWidth="120.0" minWidth="40.0" mnemonicParsing="false" onAction="#deleteCurrentPerson" prefWidth="80.0" text="Delete" />
+                              <Button fx:id="save" maxWidth="120.0" minWidth="40.0" mnemonicParsing="false" prefWidth="80.0" text="Save" />
                           </items>
                         </ToolBar>
                      </children>
